@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Veridian - MVP Flow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f3f4f6; /* gray-100 */
+        }
+        /* Style the mermaid diagram */
+        .mermaid svg {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="bg-white p-8 rounded-xl shadow-lg max-w-5xl w-full">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Project Veridian: Hackathon MVP Flow</h1>
+        <div class="mermaid text-center">
+            graph TD
+                subgraph "1. Frontend (Web App)"
+                    A["<b style='font-size:14px;'>Start</b><br>Project Developer Opens Web App"] --> B["<div style='padding:10px;'><b>User Submits Project</b><br>1. Enters Project Name & Dates<br>2. Draws Geo-Polygon on Map</div>"];
+                    B --> C{"<div style='padding:10px;'>Waits for Verification...</div>"};
+                    K --> L["<div style='padding:10px;'><b style='font-size:14px;'>Success!</b><br>Display Verification Certificate<br>- 'Before' & 'After' Satellite Images<br>- Key Metrics (NDVI Change, CO₂ Tons)<br>- Clickable Link to Block Explorer</div>"];
+                    L --> M["<b style='font-size:14px;'>End of Demo</b>"];
+                end
+
+                subgraph "2. Backend (Verification Engine)"
+                    C --> D["<div style='padding:10px;'>Receive Project Data</div>"];
+                    D --> E["<div style='padding:10px;'><b>Step 1: Fetch Data</b><br>API Call to Satellite Service</div>"];
+                    F --> G["<div style='padding:10px;'><b>Step 2: Analyze Data</b><br>Calculate NDVI Change from Imagery</div>"];
+                    G --> H["<div style='padding:10px;'><b>Step 3: Generate Report</b><br>Create JSON with results & estimate CO₂ tons</div>"];
+                    H --> I["<div style='padding:10px;'><b>Step 4: Create Proof</b><br>Calculate SHA-256 Hash of the JSON Report</div>"];
+                    I --> J["<div style='padding:10px;'><b>Step 5: Anchor on-chain</b><br>Call Smart Contract with Project ID & Hash</div>"];
+                    J --> K["<div style='padding:10px;'>Send Final Certificate Data to Frontend</div>"];
+                end
+
+                subgraph "3. External Services (APIs)"
+                    E --> F["<div style='padding:10px; font-family:monospace; background-color:#f0f0f0; border-radius:8px;'><b>Sentinel Hub / Google Earth Engine</b><br>Returns 'Before' & 'After' satellite imagery</div>"];
+                    J --> P["<div style='padding:10px; font-family:monospace; background-color:#f0f0f0; border-radius:8px;'><b>Polygon Mumbai Testnet</b><br>Smart Contract immutably stores the verification hash</div>"];
+                end
+
+                %% Styling
+                style A fill:#2ecc71,stroke:#333,stroke-width:2px,color:#fff
+                style M fill:#e74c3c,stroke:#333,stroke-width:2px,color:#fff
+                style L fill:#9b59b6,stroke:#fff,stroke-width:2px,color:#fff
+                style F fill:#e6f7ff,stroke:#91d5ff,stroke-width:2px
+                style P fill:#e6f7ff,stroke:#91d5ff,stroke-width:2px
+        </div>
+    </div>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+</html>
